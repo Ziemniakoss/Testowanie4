@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+			xmlns:fx="http://javafx.com/fxml"
+			fx:controller="testprojcztery.controllers.CLoadingScreen" prefHeight="1000">
+	<Label AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0"
+		   alignment="CENTER" textAlignment="CENTER" >
+		Dziendoberek
+	</Label>
+</AnchorPane>
