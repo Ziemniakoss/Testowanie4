@@ -15,12 +15,9 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		ViewManager.setPrimaryStage(primaryStage);
 		ViewManager.loadView("VLoadingScreen.fxml");
+		//TODO Łączenie z bazą danych itp
+		ViewManager.loadView("VMainMenu.fxml");
 		primaryStage.show();
-	}
-
-	@Override
-	public void init() throws Exception {
-		super.init();
 	}
 
 	@Override
