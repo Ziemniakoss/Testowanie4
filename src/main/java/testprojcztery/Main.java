@@ -2,12 +2,21 @@ package testprojcztery;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import org.sqlite.SQLiteConnection;
 
-import javax.swing.text.View;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Main extends Application {
 
 	public static void main(String[] args) {
+		try{
+			Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		launch(args);
 	}
 
@@ -15,7 +24,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		ViewManager.setPrimaryStage(primaryStage);
 		ViewManager.loadView("VLoadingScreen.fxml");
-		//TODO Łączenie z bazą danych itp
 		ViewManager.loadView("VMainMenu.fxml");
 		primaryStage.show();
 	}
