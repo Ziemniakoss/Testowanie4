@@ -10,23 +10,23 @@ import java.sql.SQLException;
  */
 public interface IFlashCardDatabase {
 
-	void addFlashCard(FlashCardCollection collection, String first, String second);
+	boolean addFlashCard(FlashCardCollection collection, String first, String second) throws SQLException;
 
-	void removeFlashCard(FlashCard flashCard);
+	boolean remove(FlashCard flashCard) throws SQLException;
 
-	void updateFlashCard(FlashCard flashCard);
+	void update(FlashCard flashCard) throws SQLException;
 
 	void updateFlashCards(ObservableList<FlashCard> flashCards);
 
-	ObservableList<FlashCard> getFlashCards(FlashCardCollection collection);
+	ObservableList<FlashCard> getFlashCards(FlashCardCollection collection) throws SQLException;
 
 	void createCollection(String name, Language firstLanguage, Language secondLanguage) throws NoSuchLanguageException, SQLException;
 
-	void remove(FlashCardCollection collection);
+	boolean remove(FlashCardCollection collection) throws SQLException;
 
 	void update(FlashCardCollection collection) throws SQLException;
 
-	FlashCardCollectionData getInfo(FlashCardCollection collection);
+	FlashCardCollectionData getInfo(FlashCardCollection collection) throws SQLException;
 
-	ObservableList<FlashCardCollection> getAllCollections();
+	ObservableList<FlashCardCollection> getAllCollections() throws SQLException;
 }
