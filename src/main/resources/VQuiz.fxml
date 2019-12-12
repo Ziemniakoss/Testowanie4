@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns="http://javafx.com/javafx"
+		  xmlns:fx="http://javafx.com/fxml"
+		  fx:controller="testprojcztery.controllers.CQuiz" hgap="10" vgap="10">
+	<padding>
+		<Insets top="10" bottom="10" left="10" right="10"/>
+	</padding>
+
+	<Label text="QUIZ!" GridPane.columnSpan="2"/>
+	<Label fx:id="firstLabel" GridPane.rowIndex="1"
+		   maxWidth="300" prefWidth="300" minWidth="300"
+		   maxHeight="60" minHeight="60" prefHeight="60"/>
+	<Label fx:id="secondLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"
+		   maxWidth="300" prefWidth="300" minWidth="300"
+		   maxHeight="60" minHeight="60" prefHeight="60"/>
+	<Button onAction="#showSecond" GridPane.rowIndex="2" GridPane.columnSpan="2"
+			maxWidth="610" prefWidth="610" minWidth="610"
+			maxHeight="30" minHeight="30" prefHeight="30" text="Pokaż odpowiedź"/>
+	<Separator GridPane.rowIndex="3"/>
+	<Button fx:id="okButton" onAction="#okButtonOnAction" GridPane.rowIndex="4"
+			maxWidth="300" prefWidth="300" minWidth="300" style="-fx-background-color: green;"
+			maxHeight="30" minHeight="30" prefHeight="30" text="Ok"/>
+	<Button fx:id="noButton" onAction="#noButtonOnAction" GridPane.rowIndex="4" GridPane.columnIndex="1"
+			maxWidth="300" prefWidth="300" minWidth="300" style="-fx-background-color: red;"
+			maxHeight="30" minHeight="30" prefHeight="30" text="Pomyliłem się"/>
+	<ProgressBar fx:id="progressBar" GridPane.rowIndex="5" GridPane.columnSpan="2"
+				 maxWidth="610" prefWidth="610" minWidth="610"
+				 maxHeight="30" minHeight="30" prefHeight="30"/>
+
+</GridPane>

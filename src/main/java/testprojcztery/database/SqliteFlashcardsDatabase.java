@@ -43,7 +43,7 @@ public class SqliteFlashcardsDatabase implements IFlashCardDatabase {
 		}
 		int firstLanguageId = getLanguageId(firstLanguage);
 		int secondLanguageId = getLanguageId(secondLanguage);
-		String sql = "INSERT INTO flashcard_collection (name, first_language, second_language) values (?, ?, ?);";
+		String sql = "INSERT INTO collections (name, first_language, second_language) values (?, ?, ?);";
 		try (Connection c = getConnection()) {
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setString(1, name);
@@ -86,7 +86,7 @@ public class SqliteFlashcardsDatabase implements IFlashCardDatabase {
 
 	@Override
 	public FlashCardCollectionData getInfo(FlashCardCollection collection) throws SQLException {//TODO
-		String sql = "SELECT COUNT(*) AS amount, level FROM flashcards WHERE collection = ?";
+		String sql = "SELECT COUNT(*) AS amount, level FROM flashcards WHERE collection = ? GROUP BY level";
 		try (Connection c = getConnection()) {
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setInt(1, collection.getId());
@@ -95,9 +95,10 @@ public class SqliteFlashcardsDatabase implements IFlashCardDatabase {
 
 			while (rs.next()) {
 				try {
-					System.out.println(Integer.parseInt(rs.getString(2)));
-					levelCount[rs.getInt("level") - 1] = rs.getInt(1);
+					System.out.println("Na poziomie " + rs.getInt("level") +" kartek "+rs.getInt("amount"));
+					levelCount[rs.getInt("level") - 1] = rs.getInt("amount");
 				}catch (NumberFormatException e){
+					System.err.println(rs.getString("level") + " błąð! " + rs.getString("amount"));
 					//Pusta kolekcja, bywa no
 				}
 			}

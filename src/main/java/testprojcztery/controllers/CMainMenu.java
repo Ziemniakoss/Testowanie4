@@ -15,8 +15,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import testprojcztery.Language;
+import testprojcztery.ViewManager;
 import testprojcztery.database.*;
 
+import javax.swing.text.View;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -96,7 +98,7 @@ public class CMainMenu implements Initializable {
 
 	@FXML
 	private void playButtonOnAction(ActionEvent actionEvent) {
-
+		ViewManager.showQuiz(flashcardsListView.getItems());
 	}
 
 	@FXML
@@ -116,6 +118,8 @@ public class CMainMenu implements Initializable {
 			}else {
 				displayFlashcard(null);
 			}
+			newFlashcardFirstTextField.setText("");
+			newFlashcardSecondTextField.setText("");
 		} catch (SQLException | IllegalArgumentException | NullPointerException e) {
 			System.err.println("Błąd przy tworzeniu nowej fiszki: "+e.getMessage());
 		}
@@ -142,6 +146,8 @@ public class CMainMenu implements Initializable {
 		try {
 			db.remove(displayedFlashcard);
 			System.out.println("Usunięto fiszkę " + displayedFlashcard.getId());
+			displayFlashcard(null);
+			flashcardsListView.setItems(db.getFlashCards(displayedCollection));
 		} catch (SQLException e) {
 			System.err.println("Wystąpił błąd podczas usuwania fiszki " + displayedFlashcard.getId());
 		}
@@ -204,6 +210,7 @@ public class CMainMenu implements Initializable {
 			playButton.setDisable(false);
 			try {
 				FlashCardCollectionData data = db.getInfo(collection);
+				System.out.println(data);
 				collectionNameLabel.setText(collection.getName());
 				levelOneLabel.setText(data.getCardsOnLevelOne() + "");
 				levelTwoLabel.setText(data.getCardsOnLevelTwo() + "");

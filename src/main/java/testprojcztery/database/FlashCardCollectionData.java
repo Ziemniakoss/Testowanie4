@@ -55,4 +55,18 @@ public class FlashCardCollectionData {
 	public int getCardsOnLevelSeven() {
 		return cardsOnLevelSeven;
 	}
+
+	@Override
+	public String toString() {
+		return "FlashCardCollectionData{" +
+				"cardsOnLevelOne=" + cardsOnLevelOne +
+				", cardsOnLevelTwo=" + cardsOnLevelTwo +
+				", cardsOnLevelThree=" + cardsOnLevelThree +
+				", cardsOnLevelFour=" + cardsOnLevelFour +
+				", cardsOnLevelFive=" + cardsOnLevelFive +
+				", cardsOnLevelSix=" + cardsOnLevelSix +
+				", cardsOnLevelSeven=" + cardsOnLevelSeven +
+				", totalCards=" + totalCards +
+				'}';
+	}
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns="http://javafx.com/javafx"
+		  xmlns:fx="http://javafx.com/fxml"
+		  fx:controller="testprojcztery.controllers.CResultOfQuiz"
+		  hgap="10" vgap="10" alignment="CENTER">
+	<padding>
+		<Insets bottom="10" top="10" left="10" right="10"/>
+	</padding>
+	<Label text="Wyniki:" GridPane.columnSpan="2"/>
+
+	<Label text="Ilość fiszek: " GridPane.rowIndex="1" prefWidth="150" maxWidth="150" minWidth="150"/>
+	<Label fx:id="amountOfFlashcardsLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+	<Label text="Poprawne: " GridPane.rowIndex="2" prefWidth="150" maxWidth="150" minWidth="150"/>
+	<Label text="Błędne: " GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+
+	<Separator orientation="VERTICAL" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.rowSpan="2"/>
+
+	<Label fx:id="correctAnswersLabel" GridPane.rowIndex="3" prefWidth="150" maxWidth="150" minWidth="150"/>
+	<Label fx:id="wrongAnswersLabel" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+
+	<PieChart fx:id="pieChart" GridPane.rowIndex="4" GridPane.columnSpan="3" prefWidth="310" maxWidth="310" minWidth="310"/>
+	<Button onAction="#goToMainMenuButtonOnAction" GridPane.rowIndex="5" GridPane.columnIndex="0"
+			GridPane.columnSpan="3" text="Powrót do menu" prefWidth="310" minWidth="310" maxWidth="310"/>
+
+</GridPane>
