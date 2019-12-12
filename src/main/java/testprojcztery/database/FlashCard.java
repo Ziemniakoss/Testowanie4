@@ -40,13 +40,31 @@ public class FlashCard {
 		return level;
 	}
 
-	public void resetLevel(){
+	public void resetLevel() {
 		level = 1;
 	}
 
-	public void increaseLevel(){
-		if(level != 7){
+	public void increaseLevel() {
+		if (level != 7) {
 			level++;
 		}
+	}
+
+	@Override
+	public String toString() {
+		return first;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		FlashCard flashCard = (FlashCard) o;
+		return id == flashCard.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return id;
 	}
 }

@@ -1,7 +1,6 @@
 package testprojcztery.database;
 
 public class FlashCardCollectionData {
-	private final int id;
 	private final int cardsOnLevelOne;
 	private final int cardsOnLevelTwo;
 	private final int cardsOnLevelThree;
@@ -9,11 +8,11 @@ public class FlashCardCollectionData {
 	private final int cardsOnLevelFive;
 	private final int cardsOnLevelSix;
 	private final int cardsOnLevelSeven;
+	private final int totalCards;
 
-	public FlashCardCollectionData(int id, int cardsOnLevelOne, int cardsOnLevelTwo,
+	public FlashCardCollectionData(int cardsOnLevelOne, int cardsOnLevelTwo,
 								   int cardsOnLevelThree, int cardsOnLevelFour, int cardsOnLevelFive,
 								   int cardsOnLevelSix, int cardsOnLevelSeven) {
-		this.id = id;
 		this.cardsOnLevelOne = cardsOnLevelOne;
 		this.cardsOnLevelTwo = cardsOnLevelTwo;
 		this.cardsOnLevelThree = cardsOnLevelThree;
@@ -21,6 +20,12 @@ public class FlashCardCollectionData {
 		this.cardsOnLevelFive = cardsOnLevelFive;
 		this.cardsOnLevelSix = cardsOnLevelSix;
 		this.cardsOnLevelSeven = cardsOnLevelSeven;
+		totalCards = cardsOnLevelOne + cardsOnLevelTwo + cardsOnLevelThree + cardsOnLevelFour +
+				cardsOnLevelFive + cardsOnLevelSix + cardsOnLevelSeven;
+	}
+
+	public int getTotalCards() {
+		return totalCards;
 	}
 
 	public int getCardsOnLevelOne() {

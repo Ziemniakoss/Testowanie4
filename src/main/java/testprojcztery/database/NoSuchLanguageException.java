@@ -9,6 +9,11 @@ public class NoSuchLanguageException extends Exception {
 		this.language = language;
 	}
 
+	public NoSuchLanguageException(String message) {
+		super(message);
+		language = null;
+	}
+
 	public Language getLanguage() {
 		return language;
 	}

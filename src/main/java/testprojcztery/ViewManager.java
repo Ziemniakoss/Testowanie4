@@ -9,8 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Klasa pozwalająca na zarządzanie tym który aktualnie widok jest
@@ -18,10 +16,9 @@ import java.util.logging.Logger;
  */
 public abstract class ViewManager {
 	private static Stage primaryStage;
-	private static final Logger log;
 	private static final ResourceBundle resources;
+
 	static {
-		log = Logger.getLogger(ViewManager.class.getName());
 		resources = ResourceBundle.getBundle("text");
 	}
 
@@ -38,15 +35,14 @@ public abstract class ViewManager {
 	 */
 	public static void loadView(String name) {
 		if (primaryStage == null) {
-			log.log(Level.SEVERE, "ViewManager was not initialized");
+			System.err.println("ViewManager was not initialized");
 			throw new IllegalStateException("ViewManager was not initialized");
 		}
 		Parent root = null;
 		String fileName = name;
-		log.info("Loading view from file " + fileName);
+		System.out.println("Loading view from file " + fileName);
 		try {
 			URL resource = ViewManager.class.getClassLoader().getResource(fileName);
-			System.out.println(resource);
 			root = FXMLLoader.load(resource);
 		} catch (IOException e) {
 			e.printStackTrace();

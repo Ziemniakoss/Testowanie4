@@ -30,7 +30,7 @@ public class SqliteFlashcardsDatabase implements IFlashCardDatabase {
 		createLanguagesTable();
 		createCollectionsTable();
 		createFlashcardsTable();
-		String sql = "INSERT OR REPLACE INTO (name) VALUES ('ENGLISH'), ('POLISH'), ('GERMAN');";
+		String sql = "INSERT OR IGNORE INTO languages (name) VALUES ('ENGLISH'), ('POLISH'), ('GERMAN');";
 		try (Connection c = getConnection()) {
 			c.prepareStatement(sql).execute();
 		}
@@ -75,7 +75,7 @@ public class SqliteFlashcardsDatabase implements IFlashCardDatabase {
 
 	@Override
 	public void update(FlashCardCollection collection) throws SQLException {
-		String sql = "UPDATE flashcard_collection set name = ? where id = ? LIMIT 1;";
+		String sql = "UPDATE collections set name = ? where id = ? LIMIT 1;";
 		try (Connection c = getConnection()) {
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setString(1, collection.getName());
@@ -86,7 +86,24 @@ public class SqliteFlashcardsDatabase implements IFlashCardDatabase {
 
 	@Override
 	public FlashCardCollectionData getInfo(FlashCardCollection collection) throws SQLException {//TODO
-		return null;
+		String sql = "SELECT COUNT(*) AS amount, level FROM flashcards WHERE collection = ?";
+		try (Connection c = getConnection()) {
+			PreparedStatement ps = c.prepareStatement(sql);
+			ps.setInt(1, collection.getId());
+			ResultSet rs = ps.executeQuery();
+			int[] levelCount = new int[7];
+
+			while (rs.next()) {
+				try {
+					System.out.println(Integer.parseInt(rs.getString(2)));
+					levelCount[rs.getInt("level") - 1] = rs.getInt(1);
+				}catch (NumberFormatException e){
+					//Pusta kolekcja, bywa no
+				}
+			}
+			return new FlashCardCollectionData(levelCount[0], levelCount[1], levelCount[2], levelCount[3],
+					levelCount[4], levelCount[5], levelCount[6]);
+		}
 	}
 
 	@Override
@@ -97,19 +114,25 @@ public class SqliteFlashcardsDatabase implements IFlashCardDatabase {
 			ResultSet rs = ps.executeQuery();
 			ArrayList<FlashCardCollection> result = new ArrayList<>(rs.getFetchSize());
 			while (rs.next()) {
-				Language first = Language.valueOf(rs.getString("first_language"));
-				Language second = Language.valueOf(rs.getString("second_string"));
+				Language first = getLanguageById(rs.getInt("first_language"));
+				Language second =getLanguageById(rs.getInt("second_language"));
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				FlashCardCollection fcc = new FlashCardCollection(id, name, first, second);
 				result.add(fcc);
 			}
 			return FXCollections.observableArrayList(result);
+		} catch (NoSuchLanguageException e) {
+			System.err.println("Błąd podczas pobierania fiszek z kloekcji, niepoprawne id jezyka: "+e.getMessage());
+			return FXCollections.observableArrayList(new ArrayList<>(0));
 		}
 	}
 
 	@Override
 	public boolean addFlashCard(FlashCardCollection collection, String first, String second) throws SQLException {
+		if(first == null || first.length() < 1 || second == null || second.length() < 1){
+			throw new IllegalArgumentException();
+		}
 		String sql = "INSERT INTO flashcards (first, second, level, collection) VALUES (?, ?, ?, ?);";
 		try (Connection c = getConnection()) {
 			PreparedStatement ps = c.prepareStatement(sql);
@@ -185,7 +208,7 @@ public class SqliteFlashcardsDatabase implements IFlashCardDatabase {
 		try (Connection c = getConnection()) {
 			String sql = "SELECT id FROM languages WHERE name = ?;";
 			PreparedStatement ps = c.prepareStatement(sql);
-			ps.setString(1, language.toString());
+			ps.setString(1, language.name());
 			ResultSet result = ps.executeQuery();
 			if (result.next()) {
 				return result.getInt("id");
@@ -217,10 +240,24 @@ public class SqliteFlashcardsDatabase implements IFlashCardDatabase {
 		}
 	}
 
+	private Language getLanguageById(int id) throws SQLException, NoSuchLanguageException {
+		String sql = "SELECT name FROM languages WHERE id = ?;";
+		try (Connection c = getConnection()) {
+			PreparedStatement ps = c.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return Language.valueOf(rs.getString("name"));
+			} else {
+				throw new NoSuchLanguageException("No language with id of " + id);
+			}
+		}
+	}
+
 	private void createFlashcardsTable() throws SQLException {
 		String sql = "CREATE TABLE IF NOT EXISTS flashcards ( " +
 				" id INTEGER PRIMARY KEY, " +
-				" level INTEGER CHECK(level >= 1 AND level <= 7), " +
+				" level INTEGER CHECK(level >= 1 AND level <= 7) DEFAULT 1, " +
 				" first TEXT NOT NULL, " +
 				" second TEXT NOT NULL, " +
 				" collection INTEGER REFERENCES collections(id) ON DELETE CASCADE ON UPDATE CASCADE\n" +

@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.ProgressBar?>
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-			fx:controller="testprojcztery.controllers.CMainMenu">
+			fx:controller="testprojcztery.controllers.CMainMenu"
+			minHeight="600">
 
 	<!--Lista kolekcji fiszek-->
 	<left>
@@ -24,64 +19,101 @@
 			<!--Tworzenie nowej kolekcji-->
 			<TextField onKeyReleased="#newCollectionTextFieldOnKeyReleased" fx:id="newCollectionTextField"
 					   minHeight="30" maxHeight="30" prefHeight="30"
-					   minWidth="200" prefWidth="200"
+					   minWidth="200" prefWidth="200" promptText="Nazwa kolekcji"
 					   AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="90" AnchorPane.leftAnchor="10"/>
-			<Button fx:id="newCollectionButton" onKeyReleased="#newCollectionButtonOnKeyReleased"
+			<Button fx:id="newCollectionButton" onAction="#newCollectionButtonOnAction"
 					prefWidth="70" maxWidth="70" minWidth="70" text="Stwórz"
 					prefHeight="30" maxHeight="30" minHeight="30"
 					AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="10"/>
 		</AnchorPane>
 	</left>
+	<!-- Dane o kolekcji -->
 	<center>
 		<AnchorPane>
-			<GridPane AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10"
-					  AnchorPane.topAnchor="10" hgap="10" vgap="10">
-				<padding>
-					<Insets top="10" bottom="10" left="10" right="10"/>
-				</padding>
-				<TextField fx:id="collectionNameTextField" GridPane.columnSpan="4"
-						   onKeyReleased="#collectionNameTextFieldOnKeyReleased"/>
-				<Separator GridPane.columnSpan="4" GridPane.rowIndex="1"/>
+			<VBox spacing="10" AnchorPane.bottomAnchor="10" AnchorPane.topAnchor="10">
+				<GridPane AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10"
+						  AnchorPane.topAnchor="10" hgap="10" vgap="10">
+					<padding>
+						<Insets top="10" bottom="10" left="10" right="10"/>
+					</padding>
+					<Label fx:id="collectionNameLabel" GridPane.columnSpan="4"/>
+					<Separator GridPane.columnSpan="4" GridPane.rowIndex="1"/>
 
 
-				<!-- 1 poziom-->
-				<Label text="Poziom 1:" GridPane.rowIndex="2"/>
-				<Label fx:id="levelOneLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-				<ProgressBar fx:id="levelOneProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+					<!-- 1 poziom-->
+					<Label text="Poziom 1:" GridPane.rowIndex="2"/>
+					<Label fx:id="levelOneLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+					<ProgressBar fx:id="levelOneProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
 
-				<!-- 2 poziom-->
-				<Label text="Poziom 2:" GridPane.rowIndex="3"/>
-				<Label fx:id="levelTwoLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-				<ProgressBar fx:id="levelTwoProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+					<!-- 2 poziom-->
+					<Label text="Poziom 2:" GridPane.rowIndex="3"/>
+					<Label fx:id="levelTwoLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+					<ProgressBar fx:id="levelTwoProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
 
-				<!-- 3 poziom-->
-				<Label text="Poziom 3:" GridPane.rowIndex="4"/>
-				<Label fx:id="levelThreeLabel" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-				<ProgressBar fx:id="levelThreeProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+					<!-- 3 poziom-->
+					<Label text="Poziom 3:" GridPane.rowIndex="4"/>
+					<Label fx:id="levelThreeLabel" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+					<ProgressBar fx:id="levelThreeProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
 
-				<!-- 4 poziom-->
-				<Label text="Poziom 4:" GridPane.rowIndex="5"/>
-				<Label fx:id="levelFourLabel" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-				<ProgressBar fx:id="levelFourProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+					<!-- 4 poziom-->
+					<Label text="Poziom 4:" GridPane.rowIndex="5"/>
+					<Label fx:id="levelFourLabel" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+					<ProgressBar fx:id="levelFourProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
 
-				<!-- 5 poziom-->
-				<Label text="Poziom 5:" GridPane.rowIndex="6"/>
-				<Label fx:id="levelFiveLabel" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
-				<ProgressBar fx:id="levelFiveProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
+					<!-- 5 poziom-->
+					<Label text="Poziom 5:" GridPane.rowIndex="6"/>
+					<Label fx:id="levelFiveLabel" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+					<ProgressBar fx:id="levelFiveProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
 
-				<!-- 6 poziom-->
-				<Label text="Poziom 6:" GridPane.rowIndex="7"/>
-				<Label fx:id="levelSixLabel" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
-				<ProgressBar fx:id="levelSixProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+					<!-- 6 poziom-->
+					<Label text="Poziom 6:" GridPane.rowIndex="7"/>
+					<Label fx:id="levelSixLabel" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+					<ProgressBar fx:id="levelSixProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
 
-				<!-- 7 poziom-->
-				<Label text="Poziom 7:" GridPane.rowIndex="8"/>
-				<Label fx:id="levelSevenLabel" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
-				<ProgressBar fx:id="levelSevenProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="8"/>
+					<!-- 7 poziom-->
+					<Label text="Poziom 7:" GridPane.rowIndex="8"/>
+					<Label fx:id="levelSevenLabel" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+					<ProgressBar fx:id="levelSevenProgressBar" GridPane.columnIndex="3" GridPane.rowIndex="8"/>
 
-				<Button text="Zarządzaj fiszkami" onAction="#manageFlashcardsButtonOnAction" GridPane.rowIndex="9"/>
-				<Button text="Graj!" onAction="#playButtonOnAction" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
-			</GridPane>
+					<Button text="Graj!" onAction="#playButtonOnAction" GridPane.rowIndex="9" GridPane.columnIndex="1" fx:id="playButton"/>
+				</GridPane>
+
+				<Separator/>
+				<Label text="Fiszki w kolekcji:"/>
+
+				<ListView fx:id="flashcardsListView" AnchorPane.bottomAnchor="60" minHeight="200"/>
+
+				<HBox spacing="10">
+					<TextField fx:id="newFlashcardFirstTextField" promptText="Awers"/>
+					<TextField fx:id="newFlashcardSecondTextField" promptText="Rewers"/>
+					<Button onAction="#newFlashcardButtonOnAction" text="Dodaj!" fx:id="newFlashcardButton"/>
+				</HBox>
+
+			</VBox>
 		</AnchorPane>
 	</center>
+	<!--Dane o wybranej fiszce-->
+	<right>
+		<AnchorPane>
+			<GridPane hgap="10" vgap="10">
+				<padding>
+					<Insets bottom="10" top="10" left="10" right="10"/>
+				</padding>
+
+				<Label text="Rewers"/>
+				<TextField text="first" fx:id="firstTextField" onAction="#flashcardModified" GridPane.columnSpan="2"
+						   GridPane.columnIndex="1" AnchorPane.rightAnchor="10"/>
+
+				<Label text="Awers" GridPane.rowIndex="1"/>
+				<TextField text="second" fx:id="secondTextField" onAction="#flashcardModified" GridPane.rowIndex="1"
+						   GridPane.columnSpan="2" GridPane.columnIndex="1"/>
+
+				<Label text="Poziom" GridPane.rowIndex="2"/>
+				<Label fx:id="flashcardLevelLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+				<Button onAction="#saveFlashcard" GridPane.columnIndex="1" GridPane.rowIndex="3" text="Zapisz" fx:id="saveChangesButton"/>
+				<Button onAction="#deleteFlashcard" GridPane.rowIndex="3" GridPane.columnIndex="2" text="Usuń" fx:id="deleteFlashcardButton"/>
+
+			</GridPane>
+		</AnchorPane>
+	</right>
 </BorderPane>
