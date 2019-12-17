@@ -104,7 +104,6 @@ public class CMainMenu implements Initializable {
 	@FXML
 	private void flashcardModified(ActionEvent actionEvent) {
 		modified.set(true);
-
 	}
 
 	@FXML
@@ -242,7 +241,7 @@ public class CMainMenu implements Initializable {
 //			System.out.println(db.getInfo(db.getAllCollections().get(0)).getTotalCards());
 			modified.set(true);//Bo inaczej nie wywoal się event zmiany wartości
 			modified.addListener((e, oldValue, newValue) -> {
-				saveChangesButton.setDisable(!newValue);
+				//saveChangesButton.setDisable(!newValue);
 				System.out.println("hhhhhhhh");
 			});
 			displayFlashcard(null);
@@ -311,7 +310,7 @@ public class CMainMenu implements Initializable {
 	@FXML
 	private ProgressBar levelSevenProgressBar;
 	@FXML
-	private TextField secondTextField;
+	private Label secondTextField;
 	@FXML
 	private TextField newFlashcardFirstTextField;
 	@FXML
@@ -319,7 +318,7 @@ public class CMainMenu implements Initializable {
 	@FXML
 	private Label flashcardLevelLabel;
 	@FXML
-	private TextField firstTextField;
+	private Label firstTextField;
 	@FXML
 	private Button newFlashcardButton;
 	@FXML
