@@ -101,16 +101,16 @@
 				</padding>
 
 				<Label text="Rewers"/>
-				<TextField text="first" fx:id="firstTextField" onAction="#flashcardModified" GridPane.columnSpan="2"
-						   GridPane.columnIndex="1" AnchorPane.rightAnchor="10"/>
+				<Label text="first" fx:id="firstTextField" GridPane.columnSpan="2"
+						   GridPane.columnIndex="1" AnchorPane.rightAnchor="10" />
 
 				<Label text="Awers" GridPane.rowIndex="1"/>
-				<TextField text="second" fx:id="secondTextField" onAction="#flashcardModified" GridPane.rowIndex="1"
-						   GridPane.columnSpan="2" GridPane.columnIndex="1"/>
+				<Label text="second" fx:id="secondTextField" GridPane.rowIndex="1"
+						   GridPane.columnSpan="2" GridPane.columnIndex="1" />
 
 				<Label text="Poziom" GridPane.rowIndex="2"/>
 				<Label fx:id="flashcardLevelLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-				<Button onAction="#saveFlashcard" GridPane.columnIndex="1" GridPane.rowIndex="3" text="Zapisz" fx:id="saveChangesButton"/>
+				<!--<Button onAction="#saveFlashcard" GridPane.columnIndex="1" GridPane.rowIndex="3" text="Zapisz" fx:id="saveChangesButton"/>-->
 				<Button onAction="#deleteFlashcard" GridPane.rowIndex="3" GridPane.columnIndex="2" text="Usuń" fx:id="deleteFlashcardButton"/>
 
 			</GridPane>

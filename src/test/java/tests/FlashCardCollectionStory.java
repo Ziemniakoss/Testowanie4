@@ -14,25 +14,8 @@ import java.util.List;
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 import static org.jbehave.core.reporters.Format.CONSOLE;
 
-public class FlashCardCollectionStory extends JUnitStories {
-    @Override
-    public Configuration configuration() {
-        return new MostUsefulConfiguration()
-                .useStoryLoader(new LoadFromClasspath(this.getClass()))
-                .useStoryReporterBuilder(new StoryReporterBuilder()
-                        .withCodeLocation(codeLocationFromClass(this.getClass()))
-                        .withFormats(CONSOLE));
-    }
-
-    @Override
-    public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(configuration(), new FlashCardCollectionSteps());
-    }
-
-
-
-    @Override
-    protected List<String> storyPaths() {
-        return Arrays.asList("stories/flash_card_collection.story");
+public class FlashCardCollectionStory extends SimpleConfiguration {
+    public FlashCardCollectionStory() {
+        super(new FlashCardCollectionSteps(), "stories/flash_card_collection.story");
     }
 }
