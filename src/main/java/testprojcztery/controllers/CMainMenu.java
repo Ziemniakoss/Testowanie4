@@ -239,7 +239,7 @@ public class CMainMenu implements Initializable {
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		try {
 			db = SqliteFlashcardsDatabase.getInstance();
-			System.out.println(db.getInfo(db.getAllCollections().get(0)).getTotalCards());
+//			System.out.println(db.getInfo(db.getAllCollections().get(0)).getTotalCards());
 			modified.set(true);//Bo inaczej nie wywoal się event zmiany wartości
 			modified.addListener((e, oldValue, newValue) -> {
 				saveChangesButton.setDisable(!newValue);

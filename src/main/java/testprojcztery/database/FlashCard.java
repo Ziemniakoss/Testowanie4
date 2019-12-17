@@ -8,7 +8,7 @@ public class FlashCard {
 	private String second;
 
 
-	FlashCard(int id, String first, String second, int level) {
+	public FlashCard(int id, String first, String second, int level) {
 		this.id = id;
 		this.first = first;
 		this.second = second;

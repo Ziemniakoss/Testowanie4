@@ -25,7 +25,7 @@ public class SqliteFlashcardsDatabase implements IFlashCardDatabase {
 	/**
 	 * Tworzy wszystkie table jeżeli nie istnieją
 	 */
-	private SqliteFlashcardsDatabase() throws SQLException {
+	public SqliteFlashcardsDatabase() throws SQLException {
 		//Sprawdzanie czy istenieją wszstkie tabele
 		createLanguagesTable();
 		createCollectionsTable();
@@ -268,7 +268,7 @@ public class SqliteFlashcardsDatabase implements IFlashCardDatabase {
 		}
 	}
 
-	private Connection getConnection() throws SQLException {
+	public Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(connectionString);
 	}
 }

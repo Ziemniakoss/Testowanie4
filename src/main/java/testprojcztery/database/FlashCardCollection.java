@@ -8,7 +8,7 @@ public class FlashCardCollection {
 	private final Language firstLanguage;
 	private final Language secondLanguage;
 
-	FlashCardCollection(int id, String name, Language firstLanguage, Language secondLanguage) {
+	public FlashCardCollection(int id, String name, Language firstLanguage, Language secondLanguage) {
 		this.id = id;
 		this.name = name;
 		this.firstLanguage = firstLanguage;
