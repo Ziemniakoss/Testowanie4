@@ -18,22 +18,8 @@ public class FlashCardCollectionSteps {
     @Given("a collection <name>, <language> and <translationlanguage>")
     public void givenACollectionnamelanguageAndtranslationlanguage(@Named("name") String name, @Named("language") String language, @Named("translationlanguage") String translationlanguage) {
         this.collectionName = name;
-
-        if(language.compareTo("Polski") == 0){
-            this.language = Language.POLISH;
-        } else if(language.compareTo("Angielski") == 0){
-            this.language = Language.ENGLISH;
-        } else {
-            this.language = Language.GERMAN;
-        }
-
-        if(translationlanguage.compareTo("Polski") == 0){
-            this.translationLanguage = Language.POLISH;
-        } else if(translationlanguage.compareTo("Angielski") == 0){
-            this.translationLanguage = Language.ENGLISH;
-        } else {
-            this.translationLanguage = Language.GERMAN;
-        }
+        this.language = Language.valueOf(language);
+        this.translationLanguage = Language.valueOf(translationlanguage);
     }
 
     @When("user creates a new flashcard collection")
@@ -45,7 +31,9 @@ public class FlashCardCollectionSteps {
     public void thenTheNewFlashcardCollectionShouldHavenamelanguageAndtranslationlanguage(@Named("name") String name, @Named("language") String language, @Named("translationlanguage") String translationlanguage) {
         System.out.println(flashCardCollection.getFirstLanguage().toString());
         System.out.println(language);
-        assertTrue(flashCardCollection.getName() == name && flashCardCollection.getFirstLanguage().toString().compareTo(language) == 0 && flashCardCollection.getSecondLanguage().toString().compareTo(translationlanguage) == 0 );
+        assertTrue(flashCardCollection.getName() == name);
+        assertTrue(flashCardCollection.getFirstLanguage().name().compareTo(language) == 0);
+        assertTrue(flashCardCollection.getSecondLanguage().name().compareTo(translationlanguage) == 0 );
     }
 
 

@@ -1,6 +1,10 @@
 package tests;
 
-import org.jbehave.core.annotations.*;
+import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.Named;
+import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
+import org.junit.Test;
 import testprojcztery.database.FlashCard;
 
 import static org.junit.Assert.assertTrue;
